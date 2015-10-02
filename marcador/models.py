@@ -13,5 +13,8 @@ class Bookmark(models.Model):
     title = models.CharField('title', max_length=255)
     description = models.TextField('description', blank=True)
     is_public = models.BooleanField('public', default=True)
-
-
+	date_created = models.DateTimeField('date created')
+    date_updated = models.DateTimeField('date updated')
+    owner = models.ForeignKey(User, verbose_name='owner',
+        related_name='bookmarks')
+    tags = models.ManyToManyField(Tag, blank=True)
