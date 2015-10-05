@@ -8,6 +8,12 @@ from django.db import models
 class Tag(models.Model):
 	name = models.CharField(max_length=50, unique=True)
 
+class PublicBookmarkManager(models.Manager):
+	def get_queryset(self):
+		qs = super(PublicBookmarkManager, self).get_queryset()
+		return qs.filter(is_public=True)
+
+@python_2_unicode_compatible
 class Bookmark(models.Model):
 	url = models.URLField()
 	title = models.CharField('title', max_length=255)
