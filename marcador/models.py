@@ -13,7 +13,6 @@ class PublicBookmarkManager(models.Manager):
 		qs = super(PublicBookmarkManager, self).get_queryset()
 		return qs.filter(is_public=True)
 
-@python_2_unicode_compatible
 class Bookmark(models.Model):
 	url = models.URLField()
 	title = models.CharField('title', max_length=255)
