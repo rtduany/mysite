@@ -1,10 +1,10 @@
-from django.db import models
-
-# Create your models here.
 # encoding: utf-8
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 
+# Create your models here.
 class Tag(models.Model):
 	name = models.CharField(max_length=50, unique=True)
 
@@ -22,6 +22,9 @@ class Bookmark(models.Model):
 	date_updated = models.DateTimeField('date updated')
 	owner = models.ForeignKey(User, verbose_name='owner', related_name='bookmarks')
 	tags = models.ManyToManyField(Tag, blank=True)
+
+	objects = models.Manager()
+	public = PublicBookmarkManager()
 
 	class Meta:
 		verbose_name = 'bookmark'
