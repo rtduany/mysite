@@ -9,3 +9,7 @@ class BookmarkAdmin(admin.ModelAdmin):
     list_filter = ('is_public', 'owner__username')
     search_fields = ['url', 'title', 'description']
     readonly_fields = ('date_created', 'date_updated')
+
+
+admin.site.register(Bookmark, BookmarkAdmin)
+admin.site.register(Tag)
