@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'marcador',
 	'crispy_forms',
+	'marcador.templatetags.marcador_tags',
 )
 
 MIDDLEWARE_CLASSES = (
