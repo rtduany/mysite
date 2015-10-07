@@ -20,3 +20,20 @@ def bookmark_user(request, username):
 		bookmarks = Bookmark.public.filter(owner__username=username)
 		context = {'bookmarks': bookmarks, 'owner': user}
 	return render(request, 'marcador/bookmark_user.html', context)
+
+
+@login_required
+def bookmark_create(request):
+    if request.method == 'POST':
+        form = BookmarkForm(data=request.POST)
+        if form.is_valid():
+            bookmark = form.save(commit=False)
+            bookmark.owner = request.user
+            bookmark.save()
+            form.save_m2m()
+            return redirect('marcador_bookmark_user',
+                username=request.user.username)
+    else:
+        form = BookmarkForm()
+    context = {'form': form, 'create': True}
+    return render(request, 'marcador/form.html', context)
